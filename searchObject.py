@@ -8,12 +8,10 @@ def search(array,criteria):
             newarray.append(obj)
     return newarray
 
-def isStringUpper(obj):
-    if(obj.isupper()):
-        return True
-    else:
-        return False
+def check_string_starts_with_any(sub_str):
+    predicate = lambda main_str : main_str.startswith(sub_str)
+    return predicate
 
 array = ["hello","HI","WelComE","to","ZEISS"]
-newarray = search(array,isStringUpper)
+newarray = search(array,check_string_starts_with_any('t'))
 display(newarray)
