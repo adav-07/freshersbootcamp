@@ -5,7 +5,7 @@ def search(array,criteria):
             newarray.append(obj)
     print(newarray)
 
-def criteria(obj):
+def isStringUpper(obj):
     if(obj.isupper()):
         return True
     else:
