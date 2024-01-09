@@ -1,9 +1,12 @@
+def display(array):
+    print(array)
+    
 def search(array,criteria):
     newarray=[]
     for obj in array:
         if(criteria(obj)):
             newarray.append(obj)
-    print(newarray)
+    return newarray
 
 def isStringUpper(obj):
     if(obj.isupper()):
@@ -11,5 +14,6 @@ def isStringUpper(obj):
     else:
         return False
 
-array=["hello","HI","WelComE","to","ZEISS"]
-search(array,criteria)
+array = ["hello","HI","WelComE","to","ZEISS"]
+newarray = search(array,isStringUpper)
+display(newarray)
