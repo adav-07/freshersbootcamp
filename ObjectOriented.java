@@ -1,15 +1,24 @@
 import java.util.stream.Stream;
 import java.util.function.Predicate;
 
-class FilterMethods{
+class StringListFilterItems{
     
     public String[] filterItems(String[] items, Predicate<String> criteria) {
       return Stream.of(items).filter(criteria)
               .toArray(String[]::new);
     }
+}
+
+class StartsWithStrategy{
     
-    public Predicate<String> checkStringStartWithAny(String startString){
-        Predicate<String> preciateFunctionObj =str -> str.startsWith(startString);
+    private String startsWith;
+    
+    public void setStartsWith(String startString){
+        startsWith=startString;
+    }
+    
+    public Predicate<String> checkStringStartWithAny(){
+        Predicate<String> preciateFunctionObj =str -> str.startsWith(startsWith);
         return preciateFunctionObj;
     }
 }
@@ -30,11 +39,12 @@ class ConsoleDisplayController{
 }
 
 class Main {
-    
     public static void main(String[] args) {
         String[] items = {"hello","HI","WelComE","to","ZEISS"};
-        FilterMethods Filterobject=new FilterMethods();
-        String[] itemsStartsWith = Filterobject.filterItems(items, str -> str.startsWith("Z"));
+        StringListFilterItems filterObject=new StringListFilterItems();
+        StartsWithStrategy strategyObject=new StartsWithStrategy();
+        strategyObject.setStartsWith("Z");
+        String[] itemsStartsWith = filterObject.filterItems(items, strategyObject.checkStringStartWithAny());
         ConsoleDisplayController displayObject=new ConsoleDisplayController();
         displayObject.setContent(itemsStartsWith);
         displayObject.display();
