@@ -1,18 +1,29 @@
 import java.util.stream.Stream;
 import java.util.function.Predicate;
+import java.util.ArrayList;
 
 class StringListFilterItems{
     private String[] filteredItems;
-    private Predicate<String> filterCriteria;
+    StartsWithStrategy strategyObject=new StartsWithStrategy();
     
-    public void setFilterItems(String[] items, Predicate<String> criteria){
+    
+    public void setFilterItems(String[] items){
         filteredItems = items;
-        filterCriteria = criteria;
     }
     
     public String[] filterItems() {
-      return Stream.of(filteredItems).filter(filterCriteria)
-              .toArray(String[]::new);
+        strategyObject.setStartsWith("Z");
+        ArrayList<String> tempList=new ArrayList<>();
+        for (String item : filteredItems){
+            if(strategyObject.invoke(item)){
+                tempList.add(item);
+            }
+        }
+        String[] returnList=new String[tempList.size()];
+        for(int i=0;i<tempList.size();i++){
+            returnList[i] = tempList.get(i);
+        }
+        return returnList;
     }
 }
 
@@ -24,10 +35,10 @@ class StartsWithStrategy{
         startsWith=startString;
     }
     
-    public Predicate<String> checkStringStartWithAny(){
-        Predicate<String> preciateFunctionObj =str -> str.startsWith(startsWith);
-        return preciateFunctionObj;
+    public boolean invoke(String item){
+        return item.startsWith(startsWith);
     }
+    
 }
 
 class ConsoleDisplayController{
@@ -49,9 +60,8 @@ class HelloWorld {
     public static void main(String[] args) {
         String[] items = {"hello","HI","WelComE","to","ZEISS"};
         StringListFilterItems filterObject=new StringListFilterItems();
-        StartsWithStrategy strategyObject=new StartsWithStrategy();
-        strategyObject.setStartsWith("Z");
-        filterObject.setFilterItems(items, strategyObject.checkStringStartWithAny());
+        
+        filterObject.setFilterItems(items);
         String[] itemsStartsWith = filterObject.filterItems();
         ConsoleDisplayController displayObject=new ConsoleDisplayController();
         displayObject.setContent(itemsStartsWith);
