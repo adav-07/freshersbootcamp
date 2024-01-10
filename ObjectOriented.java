@@ -2,9 +2,16 @@ import java.util.stream.Stream;
 import java.util.function.Predicate;
 
 class StringListFilterItems{
+    private String[] filteredItems;
+    private Predicate<String> filterCriteria;
     
-    public String[] filterItems(String[] items, Predicate<String> criteria) {
-      return Stream.of(items).filter(criteria)
+    public void setFilterItems(String[] items, Predicate<String> criteria){
+        filteredItems = items;
+        filterCriteria = criteria;
+    }
+    
+    public String[] filterItems() {
+      return Stream.of(filteredItems).filter(filterCriteria)
               .toArray(String[]::new);
     }
 }
@@ -38,13 +45,14 @@ class ConsoleDisplayController{
     }
 }
 
-class Main {
+class HelloWorld {
     public static void main(String[] args) {
         String[] items = {"hello","HI","WelComE","to","ZEISS"};
         StringListFilterItems filterObject=new StringListFilterItems();
         StartsWithStrategy strategyObject=new StartsWithStrategy();
         strategyObject.setStartsWith("Z");
-        String[] itemsStartsWith = filterObject.filterItems(items, strategyObject.checkStringStartWithAny());
+        filterObject.setFilterItems(items, strategyObject.checkStringStartWithAny());
+        String[] itemsStartsWith = filterObject.filterItems();
         ConsoleDisplayController displayObject=new ConsoleDisplayController();
         displayObject.setContent(itemsStartsWith);
         displayObject.display();
