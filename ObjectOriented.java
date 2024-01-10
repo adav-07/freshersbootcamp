@@ -1,7 +1,7 @@
 import java.util.stream.Stream;
 import java.util.function.Predicate;
 
-class StringMethods{
+class FilterMethods{
     public String[] filterItems(String[] items, Predicate<String> criteria) {
       return Stream.of(items).filter(criteria)
               .toArray(String[]::new);
@@ -20,11 +20,11 @@ class Display{
     }
 }
 
-class Main {
+class HelloWorld {
     public static void main(String[] args) {
         String[] items = {"hello","HI","WelComE","to","ZEISS"};
-        StringMethods Stringobject=new StringMethods();
-        String[] itemsStartsWith = Stringobject.filterItems(items, str -> str.startsWith("H"));
+        FilterMethods Filterobject=new FilterMethods();
+        String[] itemsStartsWith = Filterobject.filterItems(items, str -> str.startsWith("Z"));
         Display displayObject=new Display();
         displayObject.display(itemsStartsWith);
     }
