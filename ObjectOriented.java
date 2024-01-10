@@ -10,6 +10,9 @@ class StringMethods{
         Predicate<String> preciateFunctionObj =str -> str.startsWith(startString);
         return preciateFunctionObj;
     }
+}
+
+class Display{
     public void display(String [] itemsStartsWith){
         for(String item: itemsStartsWith){
             System.out.println(item);
@@ -17,11 +20,12 @@ class StringMethods{
     }
 }
 
-class HelloWorld {
+class Main {
     public static void main(String[] args) {
         String[] items = {"hello","HI","WelComE","to","ZEISS"};
         StringMethods Stringobject=new StringMethods();
         String[] itemsStartsWith = Stringobject.filterItems(items, str -> str.startsWith("H"));
-        Stringobject.display(itemsStartsWith);
+        Display displayObject=new Display();
+        displayObject.display(itemsStartsWith);
     }
 }
