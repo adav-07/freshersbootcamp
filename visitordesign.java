@@ -11,15 +11,6 @@ class WordDocument {
         }
         return true;
     }
-    public boolean save(String path) {
-        for(DocumentPart part: documentParts){
-            if(!part.save(path)){
-                System.out.println("Save failed");
-                return false;
-            }
-        }
-        return true;
-    }
     public void convertToHTML(){
         for(DocumentPart part: documentParts){
             part.convert(converter);
@@ -56,22 +47,12 @@ abstract class DocumentPart {
     String name;
     Integer[] coordinates;
     abstract void paint();
-    abstract boolean save(String destination);
     abstract void convert(IConverter converter);
 }
 
 class Paragraph extends DocumentPart {
     void paint(){
         System.out.println("Painting paragraph");
-    }
-    boolean save(String destination){
-        //successful save
-        if(true) {
-            System.out.println("Paragraph saved to " + destination);
-            return true;
-        }
-        //save failed
-        return false;
     }
     public void convert(IConverter converter){
         converter.convert(this);
@@ -82,15 +63,6 @@ class Hyperlink extends DocumentPart{
     void paint(){
         System.out.println("Painting hyperlink");
     }
-    boolean save(String destination){
-        //successful save
-        if(true) {
-            System.out.println("Hyperlink saved to " + destination);
-            return true;
-        }
-        //save failed
-        return false;
-    }
      public void convert(IConverter converter){
         converter.convert(this);
     }
@@ -100,16 +72,7 @@ class Header extends DocumentPart {
     void paint(){
         System.out.println("Painting Header");
     }
-    boolean save(String destination){
-        //successful save
-        if(true) {
-            System.out.println("Header saved to " + destination);
-            return true;
-        }
-        //save failed
-        return false;
-    }
-     public void convert(IConverter converter){
+    public void convert(IConverter converter){
         converter.convert(this);
     }
 }
@@ -118,35 +81,20 @@ class Footer extends DocumentPart {
     void paint(){
         System.out.println("Painting Footer");
     }
-    boolean save(String destination){
-        //successful save
-        if(true) {
-            System.out.println("Footer saved to " + destination);
-            return true;
-        }
-        //save failed
-        return false;
-    }
-     public void convert(IConverter converter){
+    public void convert(IConverter converter){
         converter.convert(this);
     }
 }
 
-public class VisitorDesign{
+public class Main{
     public static void main(String args[]) {
         
         DocumentPart paragraph = new Paragraph();
         DocumentPart hyperlink = new Hyperlink();
         DocumentPart header = new Header();
         DocumentPart footer = new Footer();
-    
         DocumentPart[] parts = new DocumentPart[]{paragraph, hyperlink, header, footer};
-        
         WordDocument wordDoc = new WordDocument(parts, new HTMLConverter());
-        
-        boolean openResult = wordDoc.open("/");
-        boolean saveResult = wordDoc.save("/");
-        
         wordDoc.convertToHTML();
     
     }
