@@ -79,23 +79,23 @@ Here's the basic syntax for declaring an `Action` delegate:
 
 Below is a simple implementation showing how action can be used in C#
 ```c#
-	using System;
-	class Program
-	{
-	    public static void func()
-	    {
-	        Console.WriteLine("function called");
-	    }
-	}
-	public class MainClass
-	{
-	    public static void Main(string[] args)
-	    {
-	        Action action = Program.func;
-	        action();// invokes the func method that has
-			         // been subscribed to action
-	    }
-	}
+using System;
+class Program
+{
+    public static void func()
+    {
+        Console.WriteLine("function called");
+    }
+}
+public class MainClass
+{
+    public static void Main(string[] args)
+    {
+        Action action = Program.func;
+        action();// invokes the func method that has
+		         // been subscribed to action
+    }
+}
 ```
 
 ***Func:***
