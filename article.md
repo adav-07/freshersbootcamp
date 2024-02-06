@@ -36,20 +36,18 @@ namespace Delegates
 	            Console.WriteLine("Multiple={0}",a * a);
 	        }
 	    }
-	    class Program
-	    {
-	        delegate void DelOp(int x);
-
-	        static void Main(string[] args)
-	        {
-	            // Delegate instantiation
-	            DelOp obj = Operation.Add;
-	            obj += Operation.Square;// subscribing methods to delegates
-
-	            obj(2);
-	        }
-	    }
-	}
+    class Program
+	{
+        delegate void DelOp(int x);
+        static void Main(string[] args)
+        {
+	        // Delegate instantiation
+	        DelOp obj = Operation.Add;
+	        obj += Operation.Square;// subscribing methods to delegates
+            obj(2);
+        }
+    }
+}
 ```
 Output:
 Addition=12
