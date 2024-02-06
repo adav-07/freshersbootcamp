@@ -130,36 +130,36 @@ public class HelloWorld
 ***Achieving loose-coupling by using delegates:***
 Delegates in C# can be used to achieve loose coupling by allowing one component of an application to call methods in another component without needing to know the details or dependencies of that component. This promotes modularity and flexibility in the design of the software. Here's how delegates help achieve loose coupling:
 ```c#
-	using System;
+using System;
 
-	namespace Delegates
-	{
-	    class Operation
-	    {
-	       public event Action EventHandler;
+namespace Delegates
+{
+    class Operation
+    {
+       public event Action EventHandler;
 	       
-	       public void OnEventOccured(){
-	           EventHandler?.Invoke();
-	       }
-	    }
-	    class Manager{
-	        public void notify(){
-	            Console.WriteLine("notifier called");
-	        }
-	    }
-	    public class HelloWorld
-	    {
-	        static void Main(string[] args)
-	        {
-	            Manager manager = new Manager();
-	            Action notifier = new Action(manager.notify);
-	            Operation operation=new Operation();
-	            operation.EventHandler+=notifier;
-	            operation.OnEventOccured();
-	            Console.ReadLine();
-	        }
-	    }
-	}
+       public void OnEventOccured(){
+           EventHandler?.Invoke();
+       }
+    }
+    class Manager{
+        public void notify(){
+            Console.WriteLine("notifier called");
+        }
+    }
+    public class HelloWorld
+    {
+        static void Main(string[] args)
+        {
+            Manager manager = new Manager();
+            Action notifier = new Action(manager.notify);
+            Operation operation=new Operation();
+            operation.EventHandler+=notifier;
+            operation.OnEventOccured();
+            Console.ReadLine();
+        }
+    }
+}
 ```
 Event-driven programming in C# offers a powerful paradigm for building responsive and interactive applications. By leveraging events and delegates, developers can create modular, loosely coupled components that communicate seamlessly, enhancing code readability, maintainability, and scalability.
 
